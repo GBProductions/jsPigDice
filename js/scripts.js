@@ -26,40 +26,40 @@ function PigDiceGame() {
   this.playerTurn = 1;
 }
 
-PigDiceGame.prototype.changeTurn = function (){
-  if (this.playerTurn === 1){
-    this.playerTurn = 2;
-  }else {
-    this.playerTurn = 1;
-  }
-}
+// PigDiceGame.prototype.changeTurn = function (){
+//   if (this.playerTurn === 1){
+//     this.playerTurn = 2;
+//   }else {
+//     this.playerTurn = 1;
+//   }
+// }
 
 PigDiceGame.prototype.playerRoll = function(){
   let roll = randomizer(1, 6);
 
-  switch(this.playerTurn){
-  case 1:
-    if (roll === 1){
-      this.changeTurn();
-      this.players[0].currentScore = 0;
-      return roll;
-    } else {
-      this.players[0].currentScore += roll;
-      return roll;
-    };
-  case 2:
-    if (roll === 1){
-      this.changeTurn();
-      this.players[1].currentScore = 0;
-      return roll;
-    } else {
-      this.players[1].currentScore += roll;
-      return roll;
-    };
-};
+//   switch(this.playerTurn){
+//   case 1:
+//     if (roll === 1){
+//       this.changeTurn();
+//       this.players[0].currentScore = 0;
+//       return roll;
+//     } else {
+//       this.players[0].currentScore += roll;
+//       return roll;
+//     };
+//   case 2:
+//     if (roll === 1){
+//       this.changeTurn();
+//       this.players[1].currentScore = 0;
+//       return roll;
+//     } else {
+//       this.players[1].currentScore += roll;
+//       return roll;
+//     };
+// };
 
 PigDiceGame.prototype.playerHold = function(){
-  
+
 }
 
 function randomizer
@@ -78,11 +78,37 @@ function Player(){
   this.totalScore = 0;
 };
 
-//USER INTERFACE LOGIC
+this.prototype.takeTurn = function() {
+  let turnScore = 0 
+  let turnOver = false;
 
-// function diceDisplay/numberDisplay
-// function checkForWinner
-// function scoreDisplay
+  while (!turnOver) {
+    let roll = this.randomizer();
+    if (roll === 1) {
+      turnOver = true;
+    }else if{
+      let 
+      if (player.hold) {
+        this.totalScore += this.currentScore;
+        turnOver = true
+      }else {
+        if (player.roll) {
+        this.currentScore += this.randomizer;
+        turnOver = false
+      }
+    }
+  }
+  return this.totalScore
+}
+
+
+
+
+
+
+
+
+//USER INTERFACE LOGIC
 
 $(document).ready(function() {
   let pigDice = new PigDiceGame();
