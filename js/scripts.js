@@ -9,15 +9,15 @@ Rule 4: If the player receives any number other than one (1) they may choose to 
 Rule 4: A players turn ends when they decide to bank their number and add it to their personal total (or they roll a one(1) and receive no points).
 Rule 5: The first player to 100 points in their personal total wins.
 
+
 */
 
-Math.ceil(Math.random()*6)
 
 //BUSINESS LOGIC FOR GAME
-PigDiceGame - object
-    changeTurn function?
-    playerRoll function?
-    playerHold function?
+// PigDiceGame - object
+//     changeTurn function?
+//     playerRoll function?
+//     playerHold function?
     
 
 function PigDiceGame() {
@@ -26,10 +26,51 @@ function PigDiceGame() {
   this.playerTurn = 1;
 }
 
+PigDiceGame.prototype.changeTurn = function (){
+  if (this.playerTurn === 1){
+    this.playerTurn = 2;
+  }else {
+    this.playerTurn = 1;
+  }
+}
+
+PigDiceGame.prototype.playerRoll = function(){
+  let roll = randomizer(1, 6);
+
+  switch(this.playerTurn){
+  case 1:
+    if (roll === 1){
+      this.changeTurn();
+      this.players[0].currentScore = 0;
+      return roll;
+    } else {
+      this.players[0].currentScore += roll;
+      return roll;
+    };
+  case 2:
+    if (roll === 1){
+      this.changeTurn();
+      this.players[1].currentScore = 0;
+      return roll;
+    } else {
+      this.players[1].currentScore += roll;
+      return roll;
+    };
+};
+
+PigDiceGame.prototype.playerHold = function(){
+  
+}
+
+function randomizer
+  return Math.ceil(Math.random()*6)
+
+
+
 //BUSINESS LOGIC FOR PLAYERS
-Player - object
-    roll function?
-    hold function?
+// Player - object
+//     roll function?
+//     hold function?
 
 
 function Player(){
@@ -39,9 +80,9 @@ function Player(){
 
 //USER INTERFACE LOGIC
 
-function diceDisplay/numberDisplay
-function checkForWinner
-function scoreDisplay
+// function diceDisplay/numberDisplay
+// function checkForWinner
+// function scoreDisplay
 
 $(document).ready(function() {
   let pigDice = new PigDiceGame();
@@ -51,18 +92,15 @@ $(document).ready(function() {
 }
   
 
-roll 
-Player 1 - object
+// roll 
+// Player 1 - object
 
-player 2 - object
+// player 2 - object
 
-Dice - object
-    randomNumber function?
+// Dice - object
+//     randomNumber function?
 
-takeTurn method
-Display current player turn
+// takeTurn method
+// Display current player turn
 
-total  score display
-
-
-
+// total  score display
