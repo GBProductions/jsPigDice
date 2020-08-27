@@ -12,6 +12,15 @@
 <body>
   <h1 class="jumbotron">PIG DICE</h1>
   <div class="container gameBoard">
+    <div class="form-group">
+      <form id="playerNames">
+        <label for="playerName1">Player<span id="playerName1">Player 1 enter your name</span>s
+        <input id="playerName" type="text" name="name">
+        <label for="playerName2">Player <span id="playerName2">Player 2 enter your name</span>
+        <input id="playerName2" type="text" name="name">
+        <button id="startGame" type="submit">Start Game!</button>
+      </form>
+    </div>
     <h2><span id = "player-turn"></span></h2>  
     <div class="buttons">
       <form id = "rollDye">
