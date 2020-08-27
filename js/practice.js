@@ -1,4 +1,4 @@
-Game logic
+/*Game logic
   total score >= 100, game over 
   2 players
   rotate turns
@@ -17,3 +17,4 @@ User logic
   check for winner if total score >=100
   Update Scoreboard
   Winner Notification
+*/

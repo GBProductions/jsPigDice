@@ -1,44 +1,88 @@
 //BUSINESS LOGIC FOR GAME
 
+
+function PigDiceGame() {
+  this.players = [] 
+}
+
 //DICE RANDOMIZER
+
 let rollDice = function() {
   return Math.ceil(Math.random()*6)
 }
 
-function Player() {
+function Player(name, turn) {
   this.roll = 0;
   this.turnScore = 0;
+  this.totalScore = 0;
   this.turn = turn;
-  this.playerName;
+  this.playerName = name
 }
 
-Player.prototype.rollOne = function(){
-  if (this.roll === 1) {
-  this.turnscore = 0;
-  return ("Sorry" + this.playerName + ", you rolled the forbidden number, your turn is over!")
+PigDiceGame.prototype.addPlayers = function(player) {
+  this.players = player
+}
+
+PigDiceGame.prototype.endTurn = function() {
+  let i = pigDiceGame.findPlayer()
+  if (i === 0) {
+    pigDiceGame.players[0].turn = false
+    pigDiceGame.players[1].turn = true
   } else {
-    this.turnScore += this.roll
+    pigDiceGame.players[1].turn = false
+    pigDiceGame.players[0].turn = true
   }
 }
 
-Player.prototype.hold = function() {
+PigDiceGame.prototype.rollOne = function() {
+  //let rollDice = Math.ceil(Math.random()*6)
+  this.roll = rollDice()
+  if (this.roll === 1) {
+    this.turnScore = 0;
+    return ("Sorry " + this.playerName + ", you rolled the forbidden number, your turn is over!");
+    this.endTurn
+  } else {
+   this.turnScore += this.roll
+  }
+  return this.turnScore;
+}
+
+let pigDice = new Player();
+console.log(pigDice.rollOne());
+
+
+PigDiceGame.prototype.findPlayer = function() {
+  for (let i=0; i < this.players.length; i++) {
+    if (this.players[i].turn === true) {
+      return i
+    }
+  }
+}
+
+
+PigDiceGame.prototype.hold = function() {
   this.totalScore += this.turnScore;
   this.turnScore = 0;
   return ("Good hold" + this.playerName + "your turn is over!")
 }
 
-Player.prototype.checkForWinner = function() {
+// let pigDice = new Player();
+// console.log(pigDice.hold());
+
+PigDiceGame.prototype.checkForWinner = function() {
   if (this.totalScore > 99) {
     return("Congratulations" + this.playerName + ", You win!!!")
   }
 }
 
-Player.prototype.newGame = function() {
+PigDiceGame.prototype.newGame = function() {
   this.roll = 0;
   this.turnScore = 0;
   this.totalScore = 0;
   this.playerName ="";
 }
+
+
 
 
 
@@ -69,10 +113,9 @@ Player.prototype.newGame = function() {
 //USER INTERFACE LOGIC
 
 $(document).ready(function() {
-  let pigDice = new PigDiceGame();
-  let playerOne = new Player();
-  let playerTwo = new Player();
-}
+  let pigDiceGame = new PigDiceGame();
+  
+});
   
 
 
@@ -80,11 +123,17 @@ $(document).ready(function() {
 
 
 $("playerName").submit(function(event) {
-  ("form#playerNames").submit(function(event)) {
+  ("form#playerNames").submit(function(event) {
     event.PreventDefault(); 
-    const 
-
-  }
+    const player1Name = $("input#playerName1").val();
+    const player2Name = $("input#playerName2").val();
+    let playerOne = new Player(player1Name, true);
+    let playerTwo = new Player(player2Name, false);
+    pigDiceGame.addPlayers(playerOne)
+    pigDiceGame.addPlayers(playerTwo)
+    console.log(player1name);
+  });
+});
 
 
 
@@ -148,16 +197,3 @@ $("playerName").submit(function(event) {
 // Rule 4: If the player receives any number other than one (1) they may choose to keep that number, or roll again.  If they roll again, they add the new rolled number to their total. (Ex: If they roll 6 and then roll a 5, the total is now 11).
 // Rule 4: A players turn ends when they decide to bank their number and add it to their personal total (or they roll a one(1) and receive no points).
 // Rule 5: The first player to 100 points in their personal total wins.
-
-
-
-
-
-
-
-
-
-
-
-
-
